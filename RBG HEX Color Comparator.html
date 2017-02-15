@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RBG HEX Color Comparator</title>
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Nova+Flat" />
+
+    <style type ="text/css">
+        h1 {
+            font-family: "Nova Flat";
+            font-size: 40px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 26.4px;
+        }
+        h2 {
+            font-family: "Nova Flat";
+            font-size: 35px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 15.4px;
+        }
+        h3 {
+            font-family: "Nova Flat";
+            font-size: 14px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 15.4px;
+        }
+        p {
+            font-family: "Nova Flat";
+            font-size: 14px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 400;
+            line-height: 40px;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+
+            width: 100%;
+            height: 100%;
+            /*The 3 lines under prevent content from moving when zooming in*/
+            /*margin-left: auto;
+            margin-right:auto;
+            width:500px; */
+        }
+
+        .leftpane {
+            width: 25%;
+            height: 100%;
+            float: left;
+            background-color: whitesmoke;
+            border-collapse: collapse;
+        }
+
+        .middlepane {
+            width: 50%;
+            height: 100%;
+            float: left;
+            border-collapse: collapse;
+        }
+
+        .rightpane {
+            width: 25%;
+            height: 100%;
+            position: relative;
+            float: right;
+            background-color: whitesmoke;
+            border-collapse: collapse;
+        }
+
+        .myButton {
+            -moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+            box-shadow:inset 0px 1px 0px 0px #97c4fe;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
+            background:-moz-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+            background:-webkit-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+            background:-o-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+            background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
+            background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
+            background-color:#3d94f6;
+            -moz-border-radius:6px;
+            -webkit-border-radius:6px;
+            border-radius:6px;
+            border:1px solid #337fed;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:"Nova Flat";
+            font-size:20px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #1570cd;
+        }
+        .myButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6));
+            background:-moz-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+            background:-webkit-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+            background:-o-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+            background:-ms-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
+            background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6',GradientType=0);
+            background-color:#1e62d0;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        .myButton2 {
+            -moz-box-shadow:inset 0px 0px 15px 3px #23395e;
+            -webkit-box-shadow:inset 0px 0px 15px 3px #23395e;
+            box-shadow:inset 0px 0px 15px 3px #23395e;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2e466e), color-stop(1, #415989));
+            background:-moz-linear-gradient(top, #2e466e 5%, #415989 100%);
+            background:-webkit-linear-gradient(top, #2e466e 5%, #415989 100%);
+            background:-o-linear-gradient(top, #2e466e 5%, #415989 100%);
+            background:-ms-linear-gradient(top, #2e466e 5%, #415989 100%);
+            background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e466e', endColorstr='#415989',GradientType=0);
+            background-color:#2e466e;
+            -moz-border-radius:17px;
+            -webkit-border-radius:17px;
+            border-radius:17px;
+            border:1px solid #1f2f47;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:"Nova Flat";
+            font-size:20px;
+            padding:6px 13px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #263666;
+        }
+        .myButton2:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #415989), color-stop(1, #2e466e));
+            background:-moz-linear-gradient(top, #415989 5%, #2e466e 100%);
+            background:-webkit-linear-gradient(top, #415989 5%, #2e466e 100%);
+            background:-o-linear-gradient(top, #415989 5%, #2e466e 100%);
+            background:-ms-linear-gradient(top, #415989 5%, #2e466e 100%);
+            background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#415989', endColorstr='#2e466e',GradientType=0);
+            background-color:#415989;
+        }
+        .myButton2:active {
+            position:relative;
+            top:1px;
+        }
+
+        /*START of CSS for Right Panel. Lists and Header*/
+        /*body {
+            margin: 0;
+            min-width: 250px;
+        } */
+
+        /* Include the padding and border in an element's total width and height */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Remove margins and padding from the list */
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the list items */
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+            font-family: "Nova Flat";
+            list-style-type: none; /*Makes bullets disappear*/
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        /* Darker background-color on hover */
+        ul li:hover {
+            background: #ddd;
+        }
+
+        /* When clicked on, add a background color and strike out text */
+        ul li.checked {
+            background: #888;
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        /* Add a "checked" mark when clicked on */
+        ul li.checked::before {
+            content: url(lock-16.png);
+            position: absolute;
+            border-color: #0a72ce;
+            /*border-style: dashed;
+            border-width: 0 5px 5px 0; */
+
+            top: 10px;
+            left: 16px;
+            transform: rotate(0deg);
+            height: 15px;
+            width: 7px;
+        }
+        /* Style the header */
+        .header {
+            background-color: #f44336;
+            padding: 30px 40px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Clear floats after the header */
+        .header:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Style the input(However, affects my entire input fields
+        input {
+            border: none;
+            width: 75%;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        } */
+
+        /*END of CSS for Right Panel.
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="leftpane" align="center">
+        <div class="header">
+            <h2 style="margin:5px">>Insert Color<</h2>
+        </div>
+
+        <br><br/>
+        <div>
+
+            <!--The following becomes our new button defined by the styles defined in the header
+            notice we can still use the ONCLICK property like in the regular buttons-->
+            <a href="#" class="myButton" onclick="disabler1()">-Hexadecimal-</a>
+
+            <input type="text" class="hexTextc" id="HexText" placeholder="#012345">
+        </div>
+
+        <br><br/>
+
+        <div>
+            <a href="#" class="myButton" onclick="disabler2()">-Red Green Blue-</a>
+            <strong>R</strong>: <input type="text" class="rgbText" id="rgbText1" placeholder="0-255" style="width: 38px;">
+            <strong>G</strong>: <input type="text" class="rgbText" id="rgbText2" placeholder="0-255" style="width: 38px;">
+            <strong>B</strong>: <input type="text" class="rgbText" id="rgbText3" placeholder="0-255" style="width: 38px;">
+        </div>
+        <br><br/>
+        <br><br/>
+        <div>
+            <a href="#" class="myButton2" onclick="getColor()">>Insert New Color<</a>
+        </div>
+        <br><br/>
+        <div>
+            <a href="#" class="myButton2" onclick="getRandomColor()">>Random Color<</a>
+        </div>
+        <p align = "left" style="font-size: 25px; font-weight: 500; margin:1cm 1cm 0cm 1cm;" > To insert a color in Hexadecimal, type "#" followed by six Hexadecimal numbers.
+            Numbers 0 to 9 and letters a to f are part of the Hexadecimal system.
+        To insert a color in RGB, type a number in the range of 0 to 255 in the three input fields. </p>
+    </div>
+
+<div class="middlepane">
+    <h1 align="center"><strong>RBG HEX Color Comparator</strong></h1>
+
+    <canvas id="RectanglesRoom" width="900" height="620" style="border:1px solid #d3d3d3; padding-left: 0;
+    padding-right: 0; margin-left: auto; margin-right: auto;display: block; width: 800px;">No support for canvas HTML5.</canvas>
+
+    <p align ="center" style="font-size: 35px; font-weight: 500"> Sometimes there is the need to see the colors but represented in different formats. Such is the case for
+    colors in Hexadecimal and RGB representation. It basically let us define the amount of Red, Green and Blue for our pixelated colors.</p>
+
+</div>
+
+<script>
+    //We need four squares in the canvas and a function that will update their colors based on their coordinates;
+    var c   = document.getElementById("RectanglesRoom");
+    var ctx = c.getContext("2d");
+
+    var sqWidth  = 200;    //Squares width and height
+    var sqHeight = 200;
+
+    var xcors = [20, 240, 460,680, 20, 240, 460, 680]; //Two arrays representing x and y coordinates of squares
+    var ycors = [20, 20, 20, 20, 320, 320, 320, 320];
+    var hcolors = ["#d6eafc","#63fb02","#1dcaee","#11f7a4","#fa1414","#9a97f5","#f3f316","#ebc185"];
+    var txcors = [20 ,240,460,680,20,240,460,680];
+    var tycors = [245, 245, 245, 245, 545,545,545,545];
+    var rgbcolors = ["rgb(66, 212, 244)","rgb(81, 239, 160)","rgb(193, 17, 27)","rgb(238, 238, 238)","rgb(71, 271, 130)","rgb(171, 205, 224)","rgb(119, 119, 119)","rgb(235, 193, 133)"];
+    var rgbxcors = [20,240,460,680,20,240,460,680];
+    var rgbycors = [270, 270, 270, 270, 570,570,570,570];
+
+
+    var newcolorDummy = "#ffff00";  //Ok,,,hmm how do we get this from the user?
+
+    function shifter(newcolorH,newcolorRGB) //Shifts colors to the right to accommodate a new color.
+    {   //HEX and RGB SHIFTER
+        var holdIndex = 'NONE';  //Holds index that will get preceeding color
+        var myList = document.getElementById('myUL');   //List nodes to check their ID's
+        var j = hcolors.length-1;
+        while(j > 0)
+        {
+            if(myList.childNodes[j].getAttribute('class') === 'checked')
+            {
+                //Do nothing. Let j decrease.
+            }
+            else if(holdIndex !== 'NONE')
+            {
+                hcolors[holdIndex]   = hcolors[j]; //Shifting color
+                rgbcolors[holdIndex] = rgbcolors[j];
+                holdIndex = j;  //Update holdIndex
+            }
+            else
+            {
+                holdIndex = j;//INDEX IS CURRENT
+            }
+            j--;
+        }
+        //Check first box, which is of index 0 at this point, j equals 0 here
+        if(myList.childNodes[j].getAttribute('class') === 'checked')
+        {
+            if(holdIndex === 'NONE')
+            {
+                //Do nothing. New Random Color will not be assigned
+            }
+            else
+            {
+                hcolors[holdIndex]   = newcolorH;
+                rgbcolors[holdIndex] = newcolorRGB;
+            }
+        }
+        else
+        {
+            hcolors[holdIndex] = hcolors[j];
+            rgbcolors[holdIndex] = rgbcolors[j];
+            hcolors[j] = newcolorH;
+            rgbcolors[j] = newcolorRGB;
+        }
+        //Update LIST Every Time We shift
+        for(var i = 0; i < myUL.childNodes.length; i++)
+        {
+            myUL.childNodes[i].innerHTML = hcolors[i];
+        }
+    }
+
+    function updateColor(incomingColorH, incomingColorRGB)  //Updates the 4 square's colors. This would go connected to a button
+    {
+        shifter(incomingColorH,incomingColorRGB);
+
+        for(var i = 0; i < xcors.length; i++)
+        {
+            /*//Create a RED line to align text
+            ctx.strokeStyle = "red";
+            ctx.moveTo(txcors[i] + 100,tycors[i]-30 );
+            ctx.lineTo(txcors[i] + 100,tycors[i]+100 );    // IMPORTANT DO NOT ERASE!!!
+            ctx.stroke(); */
+            //Text Label
+            ctx.font = '20px Nova Flat';
+
+            //Clear label space on canvas, we might
+            ctx.fillStyle = '#ffffff';
+            //ctx.fillStyle = '#000000';
+            //ctx.fillRect(txcors[i],tycors[i]- 20, sqWidth,sqHeight );
+            //Why dont we just paint the entire canvas white?
+            ctx.fillRect(txcors[i],tycors[i]-20, sqWidth,sqHeight-150 ); //CAUSE WE MOVED THE X AND Y CORS ON TOPPP!!!
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = "center";
+            ctx.fillText(hcolors[i], txcors[i]+100, tycors[i]);
+            ctx.fillText(rgbcolors[i],rgbxcors[i]+100,rgbycors[i]);
+            //ctx.fillText(hcolors[i], txcors[i], tycors[i]);
+            //ctx.fillText(rgbcolors[i],rgbxcors[i],rgbycors[i]);
+
+            //Draw squares
+            ctx.fillStyle = hcolors[i];
+            ctx.fillRect(xcors[i], ycors[i], sqWidth, sqHeight);
+
+            //Reset font color for next label to black
+            ctx.fillStyle = '#000000';
+        }
+    }
+
+    //Let us load the fonts
+    function updateColorandFont()
+    {
+        WebFontConfig = {
+            custom: {
+                families: ['Nova Flat']
+            },
+            active: function ()
+            {
+                getRandomColor();
+                //initialize();
+                //updateColor(corr);
+                //alert("We updated !colrfont")
+            }
+        };
+
+        (function () {
+            var wf = document.createElement("script");
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js';
+            wf.async = 'true';
+            document.head.appendChild(wf);
+        })();
+    }
+
+
+    updateColorandFont(); //we want the font loader only to happen once, hence trigger this function
+
+    function initialize()
+    {
+        getRandomColor();
+    }
+    //getRandomColor();
+
+    //Initial state of text fields
+    document.getElementById('HexText').disabled = false;
+    document.getElementById('rgbText1').disabled = true;
+    document.getElementById('rgbText2').disabled = true;
+    document.getElementById('rgbText3').disabled = true;
+
+    function disabler1()
+    {
+        if(document.getElementById('HexText').disabled === false)
+        {
+            //do nothing
+        }
+        else
+        {    //Enable hexfield
+            document.getElementById('HexText').disabled = false;
+            //Disable RGB fields
+            document.getElementById('rgbText1').disabled = true;
+            document.getElementById('rgbText2').disabled = true;
+            document.getElementById('rgbText3').disabled = true;
+        }
+    }
+
+    function disabler2()
+    {
+        if(document.getElementById('HexText').disabled === false)
+        {
+            //Enable RBG text fields
+            document.getElementById('rgbText1').disabled = false;
+            document.getElementById('rgbText2').disabled = false;
+            document.getElementById('rgbText3').disabled = false;
+            //Disable Hex text field
+            document.getElementById('HexText').disabled = true;
+        }
+        else
+        {
+            //Do nothing
+        }
+    }
+
+    //TO GET THE VALUES OF THE FIELD HAVE A FUNCTION THAT ACCEPTS THE VALUE OF HEX ONLY OR RBG ONLY
+    //BASED ON WHETER THEY ARE ACTIVE OR NOT
+    function getColor()
+    {
+        var newUserColorHex = '';
+        var newUserColorRGB = '';
+        var r = document.getElementById('rgbText1').value;
+        var g = document.getElementById('rgbText2').value;
+        var b = document.getElementById('rgbText3').value;
+        //alert('im outside!')
+        if(document.getElementById('HexText').disabled === false)
+        {
+            newUserColorHex = document.getElementById("HexText").value;
+            //parseInt() to get the ints from hex string, ommit index 0 since it is #
+            r = parseInt(newUserColorHex[1]+newUserColorHex[2],16);
+            g = parseInt(newUserColorHex[3]+newUserColorHex[4],16);
+            b = parseInt(newUserColorHex[5]+newUserColorHex[6],16);
+            document.getElementById("HexText").value = "";
+        }
+        else
+        {   //get RGB //alert("Im in the RGB!")
+            newUserColorHex = '#' + convert(r) + convert(g) + convert(b);
+            document.getElementById("rgbText1").value = "";
+            document.getElementById("rgbText2").value = "";
+            document.getElementById("rgbText3").value = "";
+        }
+
+        newUserColorRGB = "rgb(" + r + ", " + g + ", " + b + ")";
+
+        updateColor(newUserColorHex,newUserColorRGB);
+    }
+    //var myMin = 0;
+    //var myMax = 256;
+
+    //Returns a rnadom number between min and max
+    function getRandomArbitrary(min,max)
+    {
+        //This give us a non-uniform distribution :(
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    //Converts an integer to its hexadecimal representation
+    function convert(integer)
+    {
+        var str = Number(integer).toString(16);
+        return str.length == 1 ? "0" + str : str;
+    }
+    //Returns the hexadecimal RGB by converting 3 integers
+    function to_rgb(r, g, b) {return "#" + convert(r) + convert(g) + convert(b);}
+
+    //var color = to_rgb(r, g, b);
+
+
+    //getRandomArbitrary(myMin,myMax);
+
+    function getRandomColor()
+    {
+        var rRan = getRandomArbitrary(0,256);
+        var gRan = getRandomArbitrary(0,256);
+        var bRan = getRandomArbitrary(0,256);
+        var newHexColorRandom = to_rgb(rRan,gRan,bRan);
+        var newRGBColorRandom = "rgb(" + rRan + ", " + gRan + ", " + bRan + ")";
+        updateColor(newHexColorRandom,newRGBColorRandom);
+    }
+</script>
+
+<div class = rightpane>
+    <div id="myDIV" class="header">
+        <h2 style="margin:5px">>Lock Colors<</h2>
+    </div>
+
+    <ul id="myUL"><li>0 Hit the gym</li><li>1 Pay bills</li><li>2 Meet Aria</li><li>3 Buy eggs</li><li>4 Read a book</li><li>5 Organize office</li><li>6 Buy a doge</li><li>7 Sell that street cat</li></ul>
+
+    <p align = "center" style="font-size:30px">Click and Unclick! Please feel free to "Lock" the colors you like. Well it seems I need to say
+    a little bit more than what I had previously planned for. Quiet and exciting activity if you ask me.</p>
+
+    <script>
+        //////////////////
+        function listIndex(li_element)
+        {
+            var the_li = li_element;
+            var the_ul = li_element.parentNode;
+            var li_list = the_ul.childNodes;
+            var count = -1; // Tracks the index of LI nodes
+            // Step through all the child nodes of the UL
+            for( var i = 0; i < li_list.length; i++ )
+            {
+                var node = li_list.item(i);
+                if(node)
+                {
+                    // Check to see if the node is a LI
+                    if( node.nodeName == "LI" )
+                    {
+                        count++;    // Increment the count of LI nodes
+                        if( the_li == node )    // Check to see if this node is the one passed in
+                        {
+                            return count;
+                            //return count; //Return index of LI node.
+                        }
+                    }
+                }
+            }
+        }
+        //////////////////
+
+         var myUL = document.getElementById('myUL');
+         var lock = new Image();    //lock will contain an image lock
+        for(var i = 0; i < myUL.childNodes.length; i++)
+        {
+            myUL.childNodes[i].innerHTML = hcolors[i];
+        }
+        // Add a "lock" symbol when clicking on a list item using class checked
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function(ev) {
+            if (ev.target.tagName === 'LI') {
+
+                var liIndex = listIndex(ev.target);
+                var contain = ev.target.innerText; //Use INNERTEXT to get the content of a LI element.
+                if(ev.target.classList.toString() === 'checked')
+                {
+                    if(liIndex % 2 === 0)
+                    {
+                        ev.target.style.background = '#f9f9f9';
+                    }
+                    else
+                    {
+                        ev.target.style.background = '#eeeeee';
+                    }
+                    ev.target.classList.toggle('checked');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(txcors[liIndex] + 92, tycors[liIndex] + 35, 20, 20);
+                    ctx.fillStyle = '#000000';
+                }
+                else
+                {
+                    ev.target.classList.toggle('checked');
+                    ev.target.style.background = ev.target.innerText;
+                    //Let us insert the LOCK in the canvas
+                    lock.onload = function () {
+                        ctx.drawImage(lock,txcors[liIndex] + 92, tycors[liIndex] + 35); //(100 - 8) from half pixels from the lock, 35 for y
+                    }
+                    lock.src = 'lock-16.png';
+                }
+            }
+        }, false);
+
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+
+            if (inputValue === '')
+            {
+                alert("You must write something!");
+            }
+            else
+            {
+                //alert('size is: ' + myUL.childNodes.length);
+                myUL.removeChild(myUL.childNodes[myUL.childNodes.length-1]); //Remove last item in list
+                document.getElementById('myUL').insertBefore(li,document.getElementById('myUL').childNodes[0]); //Insert new item to list at top
+
+            }
+        }
+    </script>
+</div>
+</div>
+</body>
+</html>
